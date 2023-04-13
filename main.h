@@ -11,20 +11,50 @@
 #define MEMORY_START_ADDRESS 0x200
 #define MEMORY_END_ADDRESS 4095
 
+//Define macros for sections of Opcode
+//Most significant nibble of opcode.
+//Could not find a better name
+#define MSN(x) (x<<12)
+//Second nibble of opcode
+#define X(x) (x<<12)
+//Third nibble of opcode
+#define Y(x) ()
+//Fourth nibble of opcode
+#define N(x)
+//Second byte of opcode
+#define NN(x)
+//Second, third and fourth nibbles of opcode
+#define NNN(x)
+
+//Define enum for instructions to make errors more clear
+enum instructions {
+    i00E0, i00EE, i1NNN, i2NNN,
+    i3XNN, i4XNN, i5XY0, i6XNN,
+    i7XNN, i8XY0, i8XY1, i8XY2,
+    i8XY3, i8XY4, i8XY5, i8XY6,
+    i8XY7, i8XYE, i9XY0, iANNN,
+    iBNNN, iCXNN, iDXYN, iEX9E,
+    iEXA1, iFX07, iFX0A, iFX15,
+    iFX18, iFX1E, iFX29, iFX33,
+    iFX55, iFX65
+};
+
 //Declare registers of emulator
-extern char registers[16];
+extern unsigned char registers[16];
 //Declare memory of emulator
-extern char memory[4096];
+extern unsigned char memory[4096];
 //Declare index register
-extern short I;
+extern unsigned short I;
 //Declare program counter
 //Initializes at first available address in memory
-extern short PC;
+extern unsigned short PC;
 //Declare stack pointer
-extern char SP;
-
-
+extern unsigned char SP;
 
 extern void load(char *filename);
+
+extern unsigned short fetch(void);
+
+extern enum instructions decode(short opcode) {
 
 #endif //CHIP8_MAIN_H

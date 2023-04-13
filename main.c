@@ -1,6 +1,6 @@
 #include "main.h"
 
-short PC;
+unsigned short PC;
 
 int main(int argc, char** argv) {
 
@@ -24,11 +24,18 @@ int main(int argc, char** argv) {
 
     PC = MEMORY_START_ADDRESS;
     //FDE Loop
+
+    //Declare opcode variable
+    unsigned short opcode;
+    //Declare variable to tell type of instruction
+    enum instructions inst;
+
     while(1) {
         //Fetch
-        fetch();
+        opcode = fetch();
         //Decode
-        decode();
+        inst = decode(opcode);
         //Execute
+        //execute(opcode, inst);
     }
 }
