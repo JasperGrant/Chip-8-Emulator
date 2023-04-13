@@ -24,6 +24,7 @@ extern short PC;
 extern char SP;
 
 
+
 extern void load(char *filename);
 
 #endif //CHIP8_MAIN_H

@@ -61,6 +61,12 @@ build CMakeFiles/Chip8.dir/loader.c.obj: C_COMPILER__Chip8_Debug C$:/Users/Jaspe
   OBJECT_DIR = CMakeFiles\Chip8.dir
   OBJECT_FILE_DIR = CMakeFiles\Chip8.dir
 
+build CMakeFiles/Chip8.dir/fetcher.c.obj: C_COMPILER__Chip8_Debug C$:/Users/Jasper$ Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/fetcher.c || cmake_object_order_depends_target_Chip8
+  DEP_FILE = CMakeFiles\Chip8.dir\fetcher.c.obj.d
+  FLAGS = -g -std=gnu2x
+  OBJECT_DIR = CMakeFiles\Chip8.dir
+  OBJECT_FILE_DIR = CMakeFiles\Chip8.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Chip8
@@ -69,7 +75,7 @@ build CMakeFiles/Chip8.dir/loader.c.obj: C_COMPILER__Chip8_Debug C$:/Users/Jaspe
 #############################################
 # Link the executable Chip8.exe
 
-build Chip8.exe: C_EXECUTABLE_LINKER__Chip8_Debug CMakeFiles/Chip8.dir/main.c.obj CMakeFiles/Chip8.dir/loader.c.obj
+build Chip8.exe: C_EXECUTABLE_LINKER__Chip8_Debug CMakeFiles/Chip8.dir/main.c.obj CMakeFiles/Chip8.dir/loader.c.obj CMakeFiles/Chip8.dir/fetcher.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Chip8.dir

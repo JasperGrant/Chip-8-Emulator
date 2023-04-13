@@ -1,4 +1,3 @@
-
 #include "main.h"
 
 short PC;
@@ -6,21 +5,30 @@ short PC;
 int main(int argc, char** argv) {
 
     //Load ROM
+    //Switch case to error check for incorrect numbers of arguments
     switch(argc) {
+        //Case with no inputs
         case 1:
+            //Throw error and exit
             printf("Error: No input file!\n");
             exit(-1);
         case 2:
+            //Load input file
             load(argv[1]);
+            break;
         default:
+            //Throw error and exit
             printf("Error: Too many arguments\n");
+            exit(-1);
     }
+
     PC = MEMORY_START_ADDRESS;
     //FDE Loop
-
+    while(1) {
         //Fetch
-
+        fetch();
         //Decode
-
+        decode();
         //Execute
+    }
 }
