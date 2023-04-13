@@ -1,19 +1,26 @@
-#include <stdio.h>
 
-//Declare memory of emulator
-char memory[4096];
+#include "main.h"
 
-//Declare registers of emulator
-//TODO: Add Macros for shorthand
-char registers[0xF];
+short PC;
 
-int main() {
-    printf("Hello, World!\n");
-    return 0;
+int main(int argc, char** argv) {
 
-    //Fetch
+    //Load ROM
+    switch(argc) {
+        case 1:
+            printf("Error: No input file!\n");
+            exit(-1);
+        case 2:
+            load(argv[1]);
+        default:
+            printf("Error: Too many arguments\n");
+    }
+    PC = MEMORY_START_ADDRESS;
+    //FDE Loop
 
-    //Decode
+        //Fetch
 
-    //Execute
+        //Decode
+
+        //Execute
 }

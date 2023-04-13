@@ -1,3 +1,14 @@
 # ninja log v5
-0	108	7030499688056643	CMakeFiles/Chip8.dir/main.c.obj	6591077ea9115470
+2	92	7031022351690495	CMakeFiles/Chip8.dir/main.c.obj	c7b1bab7aed18d39
 109	280	7030499689722726	Chip8.exe	e280cff6fd5ea561
+7	97	7031022351740380	CMakeFiles/Chip8.dir/loader.c.obj	cfcb6f71927c28c7
+1	138	7031022445271379	build.ninja	dcbc860ab9b24ae3
+2	107	7031022668268566	CMakeFiles/Chip8.dir/main.c.obj	6591077ea9115470
+8	107	7031022668260013	CMakeFiles/Chip8.dir/loader.c.obj	8686f71cacf59f0b
+2	80	7031022924689536	CMakeFiles/Chip8.dir/main.c.obj	6591077ea9115470
+6	82	7031022924720428	CMakeFiles/Chip8.dir/loader.c.obj	8686f71cacf59f0b
+5	82	7031024090271063	CMakeFiles/Chip8.dir/loader.c.obj	8686f71cacf59f0b
+2	83	7031024090271063	CMakeFiles/Chip8.dir/main.c.obj	6591077ea9115470
+1	82	7031024304707144	CMakeFiles/Chip8.dir/main.c.obj	6591077ea9115470
+5	84	7031024304735748	CMakeFiles/Chip8.dir/loader.c.obj	8686f71cacf59f0b
+84	181	7031024305661277	Chip8.exe	c4bef8ad1458ec99
