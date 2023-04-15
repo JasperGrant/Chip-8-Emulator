@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <SDL.h>
 
 
 #define MEMORY_START_ADDRESS 0x200

@@ -52,24 +52,28 @@ build cmake_object_order_depends_target_Chip8: phony || CMakeFiles/Chip8.dir
 build CMakeFiles/Chip8.dir/main.c.obj: C_COMPILER__Chip8_Debug C$:/Users/Jasper$ Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/main.c || cmake_object_order_depends_target_Chip8
   DEP_FILE = CMakeFiles\Chip8.dir\main.c.obj.d
   FLAGS = -g -std=gnu2x
+  INCLUDES = -I"C:/Users/Jasper Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/SDL2/x86_64-w64-mingw32/include/SDL2"
   OBJECT_DIR = CMakeFiles\Chip8.dir
   OBJECT_FILE_DIR = CMakeFiles\Chip8.dir
 
 build CMakeFiles/Chip8.dir/loader.c.obj: C_COMPILER__Chip8_Debug C$:/Users/Jasper$ Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/loader.c || cmake_object_order_depends_target_Chip8
   DEP_FILE = CMakeFiles\Chip8.dir\loader.c.obj.d
   FLAGS = -g -std=gnu2x
+  INCLUDES = -I"C:/Users/Jasper Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/SDL2/x86_64-w64-mingw32/include/SDL2"
   OBJECT_DIR = CMakeFiles\Chip8.dir
   OBJECT_FILE_DIR = CMakeFiles\Chip8.dir
 
 build CMakeFiles/Chip8.dir/fetcher.c.obj: C_COMPILER__Chip8_Debug C$:/Users/Jasper$ Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/fetcher.c || cmake_object_order_depends_target_Chip8
   DEP_FILE = CMakeFiles\Chip8.dir\fetcher.c.obj.d
   FLAGS = -g -std=gnu2x
+  INCLUDES = -I"C:/Users/Jasper Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/SDL2/x86_64-w64-mingw32/include/SDL2"
   OBJECT_DIR = CMakeFiles\Chip8.dir
   OBJECT_FILE_DIR = CMakeFiles\Chip8.dir
 
 build CMakeFiles/Chip8.dir/decoder.c.obj: C_COMPILER__Chip8_Debug C$:/Users/Jasper$ Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/decoder.c || cmake_object_order_depends_target_Chip8
   DEP_FILE = CMakeFiles\Chip8.dir\decoder.c.obj.d
   FLAGS = -g -std=gnu2x
+  INCLUDES = -I"C:/Users/Jasper Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/SDL2/x86_64-w64-mingw32/include/SDL2"
   OBJECT_DIR = CMakeFiles\Chip8.dir
   OBJECT_FILE_DIR = CMakeFiles\Chip8.dir
 
@@ -81,9 +85,9 @@ build CMakeFiles/Chip8.dir/decoder.c.obj: C_COMPILER__Chip8_Debug C$:/Users/Jasp
 #############################################
 # Link the executable Chip8.exe
 
-build Chip8.exe: C_EXECUTABLE_LINKER__Chip8_Debug CMakeFiles/Chip8.dir/main.c.obj CMakeFiles/Chip8.dir/loader.c.obj CMakeFiles/Chip8.dir/fetcher.c.obj CMakeFiles/Chip8.dir/decoder.c.obj
+build Chip8.exe: C_EXECUTABLE_LINKER__Chip8_Debug CMakeFiles/Chip8.dir/main.c.obj CMakeFiles/Chip8.dir/loader.c.obj CMakeFiles/Chip8.dir/fetcher.c.obj CMakeFiles/Chip8.dir/decoder.c.obj | ../SDL2/x86_64-w64-mingw32/lib/libSDL2main.a ../SDL2/x86_64-w64-mingw32/lib/libSDL2.dll.a
   FLAGS = -g
-  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  LINK_LIBRARIES = -lmingw32  -mwindows  ../SDL2/x86_64-w64-mingw32/lib/libSDL2main.a  ../SDL2/x86_64-w64-mingw32/lib/libSDL2.dll.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Chip8.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
@@ -136,14 +140,14 @@ build all: phony Chip8.exe
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | ../CMakeLists.txt CMakeCache.txt CMakeFiles/3.22.3/CMakeCCompiler.cmake CMakeFiles/3.22.3/CMakeRCCompiler.cmake CMakeFiles/3.22.3/CMakeSystem.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeCInformation.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeGenericSystem.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeRCInformation.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Compiler/GNU-C.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Compiler/GNU.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Platform/Windows-GNU-C-ABI.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Platform/Windows-GNU-C.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Platform/Windows-GNU.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Platform/Windows-windres.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Platform/Windows.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Platform/WindowsPaths.cmake
+build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../cmake/modules/FindSDL2.cmake CMakeCache.txt CMakeFiles/3.22.3/CMakeCCompiler.cmake CMakeFiles/3.22.3/CMakeRCCompiler.cmake CMakeFiles/3.22.3/CMakeSystem.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeCInformation.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeGenericSystem.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeRCInformation.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CheckCSourceCompiles.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CheckIncludeFile.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CheckLibraryExists.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Compiler/GNU-C.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Compiler/GNU.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/FindPackageMessage.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/FindThreads.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Internal/CheckSourceCompiles.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Platform/Windows-GNU-C-ABI.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Platform/Windows-GNU-C.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Platform/Windows-GNU.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Platform/Windows-windres.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Platform/Windows.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Platform/WindowsPaths.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build ../CMakeLists.txt CMakeCache.txt CMakeFiles/3.22.3/CMakeCCompiler.cmake CMakeFiles/3.22.3/CMakeRCCompiler.cmake CMakeFiles/3.22.3/CMakeSystem.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeCInformation.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeGenericSystem.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeRCInformation.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Compiler/GNU-C.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Compiler/GNU.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Platform/Windows-GNU-C-ABI.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Platform/Windows-GNU-C.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Platform/Windows-GNU.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Platform/Windows-windres.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Platform/Windows.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Platform/WindowsPaths.cmake: phony
+build ../CMakeLists.txt ../cmake/modules/FindSDL2.cmake CMakeCache.txt CMakeFiles/3.22.3/CMakeCCompiler.cmake CMakeFiles/3.22.3/CMakeRCCompiler.cmake CMakeFiles/3.22.3/CMakeSystem.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeCInformation.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeGenericSystem.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeRCInformation.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CheckCSourceCompiles.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CheckIncludeFile.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/CheckLibraryExists.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Compiler/GNU-C.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Compiler/GNU.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/FindPackageMessage.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/FindThreads.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Internal/CheckSourceCompiles.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Platform/Windows-GNU-C-ABI.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Platform/Windows-GNU-C.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Platform/Windows-GNU.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Platform/Windows-windres.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Platform/Windows.cmake X$:/CLion$ 2022.1/bin/cmake/win/share/cmake-3.22/Modules/Platform/WindowsPaths.cmake: phony
 
 
 #############################################

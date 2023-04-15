@@ -213,6 +213,18 @@ Chip8_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 Chip8_SOURCE_DIR:STATIC=C:/Users/Jasper Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8
 
+//mwindows for MinGW
+MINGW32_LIBRARY:STRING=mingw32;-mwindows
+
+//Path to a library.
+SDL2MAIN_LIBRARY:FILEPATH=C:/Users/Jasper Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a
+
+//Path to a file.
+SDL2_INCLUDE_DIR:PATH=C:/Users/Jasper Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/SDL2/x86_64-w64-mingw32/include/SDL2
+
+//Where the SDL2 Library can be found
+SDL2_LIBRARY:STRING=mingw32;-mwindows;C:/Users/Jasper Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;C:/Users/Jasper Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/SDL2/x86_64-w64-mingw32/lib/libSDL2.dll.a
+
 
 ########################
 # INTERNAL cache entries
@@ -280,6 +292,10 @@ CMAKE_GENERATOR_INSTANCE:INTERNAL=
 CMAKE_GENERATOR_PLATFORM:INTERNAL=
 //Name of generator toolset.
 CMAKE_GENERATOR_TOOLSET:INTERNAL=
+//Test CMAKE_HAVE_LIBC_PTHREAD
+CMAKE_HAVE_LIBC_PTHREAD:INTERNAL=1
+//Have include pthread.h
+CMAKE_HAVE_PTHREAD_H:INTERNAL=1
 //Source directory with the top level CMakeLists.txt file for this
 // project
 CMAKE_HOME_DIRECTORY:INTERNAL=C:/Users/Jasper Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8
@@ -352,4 +368,9 @@ CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 CMAKE_STRIP-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//Details about finding SDL2
+FIND_PACKAGE_MESSAGE_DETAILS_SDL2:INTERNAL=[mingw32;-mwindows;C:/Users/Jasper Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;C:/Users/Jasper Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/SDL2/x86_64-w64-mingw32/lib/libSDL2.dll.a][C:/Users/Jasper Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/SDL2/x86_64-w64-mingw32/include/SDL2][v()]
+//Details about finding Threads
+FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
+SDL2_LIBRARY_TEMP:INTERNAL=mingw32;-mwindows;C:/Users/Jasper Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;C:/Users/Jasper Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;C:/Users/Jasper Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;C:/Users/Jasper Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;C:/Users/Jasper Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;C:/Users/Jasper Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;C:/Users/Jasper Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;C:/Users/Jasper Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;C:/Users/Jasper Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/SDL2/x86_64-w64-mingw32/lib/libSDL2main.a;C:/Users/Jasper Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/SDL2/x86_64-w64-mingw32/lib/libSDL2.dll.a
 

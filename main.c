@@ -4,6 +4,18 @@ unsigned short PC;
 
 int main(int argc, char** argv) {
 
+    if(SDL_Init(SDL_INIT_VIDEO) < 0){
+        printf("Error: Failed to initialized SDL2\n");
+        exit(-1);
+    }
+    SDL_Window *window = SDL_CreateWindow("SDL2 Window",
+                                          SDL_WINDOWPOS_CENTERED,
+                                          SDL_WINDOWPOS_CENTERED,
+                                          680, 480, 0);
+    SDL_Surface *window_surface = SDL_GetWindowSurface(window);
+    SDL_UpdateWindowSurface(window);
+    //SDL_Delay(5000);
+
     //Load ROM
     //Switch case to error check for incorrect numbers of arguments
     switch(argc) {

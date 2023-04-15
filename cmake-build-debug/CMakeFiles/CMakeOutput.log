@@ -157,3 +157,39 @@ Parsed C implicit link information from above output:
   implicit fwks: []
 
 
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: C:/Users/Jasper Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):X:/CLion 2022.1/bin/ninja/win/ninja.exe cmTC_a8d10 && [1/2] Building C object CMakeFiles/cmTC_a8d10.dir/CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_a8d10.exe
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD succeeded with the following output:
+Change Dir: C:/Users/Jasper Grant/Documents/OperatingSystems/Assignment-4/jgrant/Chip8/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):X:/CLion 2022.1/bin/ninja/win/ninja.exe cmTC_5bb5f && [1/2] Building C object CMakeFiles/cmTC_5bb5f.dir/src.c.obj
+[2/2] Linking C executable cmTC_5bb5f.exe
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
