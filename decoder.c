@@ -4,6 +4,9 @@
 
 #include "main.h"
 
+
+//TODO: Put in checks to make sure that top level paths finish in unknown instruction if incorrect
+//Example: 9XY1 Will go in as a correct 9XY0
 enum instructions decode(unsigned short opcode){
     switch(MSN(opcode)){
         case 0x0:
@@ -12,6 +15,8 @@ enum instructions decode(unsigned short opcode){
                     return i00E0;
                 case 0xe:
                     return i00EE;
+                default:
+                    return unknown;
             }
         case 0x1:
             return i1NNN;
@@ -47,6 +52,8 @@ enum instructions decode(unsigned short opcode){
                     return i8XY7;
                 case 0xe:
                     return i8XYE;
+                default:
+                    return unknown;
             }
         case 0x9:
             return i9XY0;
@@ -64,6 +71,8 @@ enum instructions decode(unsigned short opcode){
                     return iEX9E;
                 case 0xa1:
                     return iEXA1;
+                default:
+                    return unknown;
             }
         case 0xf:
             switch(NN(opcode)){
@@ -77,14 +86,19 @@ enum instructions decode(unsigned short opcode){
                     return iFX18;
                 case 0x1e:
                     return iFX1E;
+                case 0x29:
+                    return iFX29;
                 case 0x33:
                     return iFX33;
                 case 0x55:
                     return iFX55;
                 case 0x65:
                     return iFX65;
-
+                default:
+                    return unknown;
             }
+        default:
+            return unknown;
     }
 
 

@@ -8,23 +8,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 #define MEMORY_START_ADDRESS 0x200
 #define MEMORY_END_ADDRESS 4095
 
 //Define macros for sections of Opcode
 //Most significant nibble of opcode.
 //Could not find a better name
-#define MSN(x) (x<<12)
+#define MSN(x) (x>>12)
 //Second nibble of opcode
-#define X(x) (x<<12)
+#define X(x) ((x>>8)&0xf)
 //Third nibble of opcode
-#define Y(x) ()
+#define Y(x) ((x>>4)&0xf)
 //Fourth nibble of opcode
-#define N(x)
+#define N(x) (x&0xf)
 //Second byte of opcode
-#define NN(x)
+#define NN(x) (x&0xff)
 //Second, third and fourth nibbles of opcode
-#define NNN(x)
+#define NNN(x) (x&0xfff)
 
 //Define enum for instructions to make errors more clear
 enum instructions {
@@ -36,7 +37,7 @@ enum instructions {
     iBNNN, iCXNN, iDXYN, iEX9E,
     iEXA1, iFX07, iFX0A, iFX15,
     iFX18, iFX1E, iFX29, iFX33,
-    iFX55, iFX65
+    iFX55, iFX65, unknown
 };
 
 //Declare registers of emulator
@@ -55,6 +56,6 @@ extern void load(char *filename);
 
 extern unsigned short fetch(void);
 
-extern enum instructions decode(short opcode) {
+extern enum instructions decode(unsigned short opcode);
 
 #endif //CHIP8_MAIN_H

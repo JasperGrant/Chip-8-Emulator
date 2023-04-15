@@ -4,11 +4,12 @@
 
 #include "main.h"
 
-short fetch(void){
+unsigned short fetch(void){
     //Fetch opcode from memory
-    unsigned short opcode = memory[PC]<<8 & memory[PC+1];
+    unsigned char MSB = memory[PC];
+    unsigned char LSB = memory[PC+1];
     //Increment program counter
     PC += 2;
     //Return instruction
-    return opcode;
+    return MSB << 8 | LSB;
 }

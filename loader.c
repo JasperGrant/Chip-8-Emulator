@@ -3,7 +3,7 @@
 //
 #include "main.h"
 
-char memory[4096];
+unsigned char memory[4096];
 
 void load(char *filename) {
 
@@ -17,6 +17,7 @@ void load(char *filename) {
         //rom_len is equal to the length of file
         long rom_len = ftell(rom);
         //Make buffer the size of all data in file
+        rewind(rom);
         char *buffer = (char *) malloc(rom_len);
         //Read file data into buffer
         fread(buffer, sizeof(char), rom_len, rom);

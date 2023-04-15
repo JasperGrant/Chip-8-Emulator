@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
     //Declare variable to tell type of instruction
     enum instructions inst;
 
-    while(1) {
+    while(PC < 4096) {
         //Fetch
         opcode = fetch();
         //Decode
