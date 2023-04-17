@@ -4,7 +4,7 @@ project(Chip8 C)
 set(CMAKE_C_STANDARD 23)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lmingw32")
 
-add_executable(Chip8 main.c loader.c main.h fetcher.c decoder.c)
+add_executable(Chip8 main.c loader.c main.h fetcher.c decoder.c display.c)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
 set(SDL2_PATH "SDL2/x86_64-w64-mingw32")
