@@ -52,11 +52,19 @@ extern unsigned short I;
 extern unsigned short PC;
 //Declare stack pointer
 extern unsigned char SP;
+//Declare stack array
+extern unsigned short stack[16];
+//Declare display
+extern unsigned char display[64][32];
 
 extern void load(char *filename);
 
 extern unsigned short fetch(void);
 
 extern enum instructions decode(unsigned short opcode);
+
+extern void display_init(void);
+
+extern void draw_pixel(unsigned char x, unsigned char y);
 
 #endif //CHIP8_MAIN_H

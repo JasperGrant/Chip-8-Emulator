@@ -4,6 +4,7 @@ unsigned short PC;
 
 int main(int argc, char** argv) {
 
+    display_init();
     //Load ROM
     //Switch case to error check for incorrect numbers of arguments
     switch(argc) {
@@ -30,12 +31,21 @@ int main(int argc, char** argv) {
     //Declare variable to tell type of instruction
     enum instructions inst;
 
-    while(PC < 4096) {
+    SDL_Event event;
+    while(1) {
         //Fetch
         opcode = fetch();
         //Decode
         inst = decode(opcode);
         //Execute
         //execute(opcode, inst);
+
+        SDL_Delay(100);
+        while(SDL_PollEvent(&event)>0){
+            switch(event.type){
+                case SDL_QUIT:
+                    exit(0);
+            }
+        }
     }
 }
