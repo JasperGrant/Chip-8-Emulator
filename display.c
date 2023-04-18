@@ -4,18 +4,12 @@
 
 #include "main.h"
 
-//Display macros
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 320
-#define PIXEL_WIDTH 10
-#define PIXEL_HEIGHT 10
-
 //Declare globals for window, renderer, and texture
 //Global to be used in execution functions
 SDL_Window* window = NULL;
 SDL_Renderer* renderer = NULL;
 SDL_Texture* texture = NULL;
-SDL_FRect rect;
+SDL_Rect rect;
 
 unsigned char registers[16];
 
@@ -40,10 +34,10 @@ void display_init(void){
     rect.h = PIXEL_HEIGHT;
 
     //Set color of pixels
-    SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
+    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 }
 
-void draw_pixel(unsigned char x, unsigned char y){
+unsigned char draw_pixel(unsigned char x, unsigned char y){
     //Assign values from coordinate variables to rectangle representing pixel
     rect.x = x * PIXEL_WIDTH;
     rect.y = y * PIXEL_WIDTH;
@@ -52,8 +46,6 @@ void draw_pixel(unsigned char x, unsigned char y){
     if(display[x][y] == 1){
         //Set color to undraw pixel
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-        //Set VF to 1
-        registers[0xF] = 1;
         //Set pixel to 0 in array
         display[x][y] = 0;
     }
@@ -61,9 +53,14 @@ void draw_pixel(unsigned char x, unsigned char y){
         //Mark that a pixel has been set
         display[x][y] = 1;
     }
-    SDL_RenderDrawRectF(renderer, &rect);
+    SDL_RenderFillRect(renderer, &rect);
     SDL_RenderPresent(renderer);
 
     //Set color back to default regardless
-    SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
+    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+
+    //This return statement will only give 1 if a drawn pixel is now undrawn
+    //In cases like CLS where we do not care about this,
+    //simply do not catch return value
+    return !display[x][y];
 }

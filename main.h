@@ -13,6 +13,12 @@
 #define MEMORY_START_ADDRESS 0x200
 #define MEMORY_END_ADDRESS 4095
 
+//Display macros
+#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 320
+#define PIXEL_WIDTH 10
+#define PIXEL_HEIGHT 10
+
 //Define macros for sections of Opcode
 //Most significant nibble of opcode.
 //Could not find a better name
@@ -41,6 +47,41 @@ enum instructions {
     iFX55, iFX65, unknown
 };
 
+extern void execute_00E0(void);
+extern void execute_00EE(void);
+extern void execute_1NNN(unsigned short NNN);
+extern void execute_2NNN(unsigned short NNN);
+extern void execute_3XNN(unsigned char X, unsigned char NN);
+extern void execute_4XNN(unsigned char X, unsigned char NN);
+extern void execute_5XY0(unsigned char X, unsigned char Y);
+extern void execute_6XNN(unsigned char X, unsigned char NN);
+extern void execute_7XNN(unsigned char X, unsigned char NN);
+extern void execute_8XY0(unsigned char X, unsigned char Y);
+extern void execute_8XY1(unsigned char X, unsigned char Y);
+extern void execute_8XY2(unsigned char X, unsigned char Y);
+extern void execute_8XY3(unsigned char X, unsigned char Y);
+extern void execute_8XY4(unsigned char X, unsigned char Y);
+extern void execute_8XY5(unsigned char X, unsigned char Y);
+extern void execute_8XY6(unsigned char X, unsigned char Y);
+extern void execute_8XY7(unsigned char X, unsigned char Y);
+extern void execute_8XYE(unsigned char X, unsigned char Y);
+extern void execute_9XY0(unsigned char X, unsigned char Y);
+extern void execute_ANNN(unsigned short NNN);
+extern void execute_BNNN(unsigned short NNN);
+extern void execute_CXNN(unsigned char NN);
+extern void execute_DXYN(unsigned char X, unsigned char Y, unsigned char N);
+extern void execute_EX9E(unsigned char X);
+extern void execute_EXA1(unsigned char X);
+extern void execute_FX07(unsigned char X);
+extern void execute_FX0A(unsigned char X);
+extern void execute_FX15(unsigned char X);
+extern void execute_FX18(unsigned char X);
+extern void execute_FX1E(unsigned char X);
+extern void execute_FX29(unsigned char X);
+extern void execute_FX33(unsigned char X);
+extern void execute_FX55(unsigned char X);
+extern void execute_FX65(unsigned char X);
+
 //Declare registers of emulator
 extern unsigned char registers[16];
 //Declare memory of emulator
@@ -65,6 +106,8 @@ extern enum instructions decode(unsigned short opcode);
 
 extern void display_init(void);
 
-extern void draw_pixel(unsigned char x, unsigned char y);
+extern unsigned char draw_pixel(unsigned char x, unsigned char y);
+
+extern void execute(unsigned short opcode, enum instructions);
 
 #endif //CHIP8_MAIN_H
