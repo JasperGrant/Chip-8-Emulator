@@ -76,7 +76,7 @@ void execute(unsigned short opcode, enum instructions inst){
             execute_BNNN(NNN(opcode));
             break;
         case iCXNN:
-            execute_CXNN(NN(opcode));
+            execute_CXNN(X(opcode), NN(opcode));
             break;
         case iDXYN:
             execute_DXYN(X(opcode), Y(opcode), N(opcode));
@@ -254,29 +254,77 @@ void execute_8XY3(unsigned char X, unsigned char Y){
 //Execution of registers add instruction
 //ADD Vx, Vy
 void execute_8XY4(unsigned char X, unsigned char Y){
-    /*
     //If total is greater then 256
-    if(registers[X] + registers[Y]) ==
+    if(registers[X] + registers[Y] > 255) registers[0xf] = 0x01;
     //Set Vx to Vx + Vy
     registers[X] = registers[X] + registers[Y];
-     */
 }
 
-//Execution of registers subtract instruction
+//Execution of subtraction Vx - Vy instruction
 //SUB Vx, Vy
-void execute_8XY5(unsigned char X, unsigned char Y){}
-void execute_8XY6(unsigned char X, unsigned char Y){}
-void execute_8XY7(unsigned char X, unsigned char Y){}
-void execute_8XYE(unsigned char X, unsigned char Y){}
-void execute_9XY0(unsigned char X, unsigned char Y){}
+void execute_8XY5(unsigned char X, unsigned char Y){
+    //Set Vf to 1 if Vx > Vy and 0 if not
+    registers[0xf] = registers[X] > registers[Y] ? 0x01 : 0x0;
+    //Subract Vy from Vx
+    registers[X] = registers[X] - registers[Y];
+}
+
+//Execution of shift right instruction
+//SHR Vx, Vy (Vy is unused)
+void execute_8XY6(unsigned char X, unsigned char Y){
+    //Store LSB of Vx in Vf
+    registers[0xf] = registers[X] & 0b00000001;
+    //Shift Vx right
+    registers[X] >>= 1;
+}
+
+//Execution of subtraction Vy - Vx instruction
+//SUBN Vx, Vy
+void execute_8XY7(unsigned char X, unsigned char Y){
+    //Set Vf to 1 if Vy > VX and 0 if not
+    registers[0xf] = registers[Y] > registers[X] ? 0x01 : 0x0;
+    //Subract Vy from Vx
+    registers[X] = registers[Y] - registers[X];
+}
+
+//Execution of shift left instruction
+//SHL Vx, Vy (Vy is unused)
+void execute_8XYE(unsigned char X, unsigned char Y){
+    //Store MSB of Vx in Vf
+    registers[0xf] = registers[X] & 0b10000000;
+    //Shift Vx left
+    registers[X] <<= 1;
+}
+
+//Execution of set not equal instruction
+//SNE Vx, Vy
+void execute_9XY0(unsigned char X, unsigned char Y){
+    //If registers are not equal increment PC by 2
+    if(registers[X] != registers[Y]) PC+=2;
+}
 
 //Execution for index load register
+//LD I, NNN
 void execute_ANNN(unsigned short NNN){
     //Set I = NNN
     I = NNN;
 }
-void execute_BNNN(unsigned short NNN){}
-void execute_CXNN(unsigned char NN){}
+
+//Execution of jump with offset instruction
+//JP V0, NNN
+void execute_BNNN(unsigned short NNN){
+    //Set PC to address plus offset stored in V0
+    PC = NNN + registers[0x0];
+}
+
+//Execution of random number generator instruction
+void execute_CXNN(unsigned char X,unsigned char NN){
+    //Generate random number
+    //We only need limited randomness
+    registers[X] = rand();
+    //AND value with NN
+    registers[X] &= NN;
+}
 
 //Execution for draw instruction
 void execute_DXYN(unsigned char X, unsigned char Y, unsigned char N){
@@ -295,7 +343,9 @@ void execute_DXYN(unsigned char X, unsigned char Y, unsigned char N){
         byte = memory[I + y];
         //For bit in byte / column in row
         for(int x = 0; x<8; x++){
+            //If a bit is one
             if((byte & (0b10000000 >> x))){
+                //Flip bit and if a set bit is turned off: Vf = 1
                 registers[0xF] = draw_pixel(X + x, Y + y);
             }
 

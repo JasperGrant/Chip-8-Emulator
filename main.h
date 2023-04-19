@@ -68,7 +68,7 @@ extern void execute_8XYE(unsigned char X, unsigned char Y);
 extern void execute_9XY0(unsigned char X, unsigned char Y);
 extern void execute_ANNN(unsigned short NNN);
 extern void execute_BNNN(unsigned short NNN);
-extern void execute_CXNN(unsigned char NN);
+extern void execute_CXNN(unsigned char X, unsigned char NN);
 extern void execute_DXYN(unsigned char X, unsigned char Y, unsigned char N);
 extern void execute_EX9E(unsigned char X);
 extern void execute_EXA1(unsigned char X);
