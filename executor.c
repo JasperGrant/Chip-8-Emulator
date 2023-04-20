@@ -363,8 +363,29 @@ void execute_FX07(unsigned char X){}
 void execute_FX0A(unsigned char X){}
 void execute_FX15(unsigned char X){}
 void execute_FX18(unsigned char X){}
-void execute_FX1E(unsigned char X){}
-void execute_FX29(unsigned char X){}
-void execute_FX33(unsigned char X){}
+
+//Execution of add register to index instruction
+//ADD I, Vx
+void execute_FX1E(unsigned char X){
+    //Set I to I + Vx
+    I+=registers[X];
+}
+
+//Execution of select font letter instruction
+//LD F, Vx
+void execute_FX29(unsigned char X){
+    //Set I to the memory location of a font letter
+    I = registers[X] * 5;
+    //Font sprites start at 0 and each take 5 characters
+}
+
+//Execution of digit store instruction
+//LD [I] Vx
+void execute_FX33(unsigned char X){
+    //Stores base ten interpretation of Vx in I, I+1, I+2
+    //TODO: Finish this
+    memory[I] = registers[X] % 1000;
+    memory[I+1] = registers[X] % 100
+}
 void execute_FX55(unsigned char X){}
 void execute_FX65(unsigned char X){}
