@@ -104,6 +104,8 @@ extern unsigned char delay_timer;
 //Declare sound timer
 extern unsigned char sound_timer;
 
+extern unsigned char keypad[16];
+
 extern void load(char *filename);
 
 extern unsigned short fetch(void);
@@ -115,5 +117,9 @@ extern void display_init(void);
 extern unsigned char draw_pixel(unsigned char x, unsigned char y);
 
 extern void execute(unsigned short opcode, enum instructions);
+
+extern void poll(void);
+
+extern SDL_Renderer* renderer;
 
 #endif //CHIP8_MAIN_H

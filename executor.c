@@ -14,6 +14,8 @@ unsigned char delay_timer;
 
 unsigned char sound_timer;
 
+unsigned char keypad[16];
+
 
 void execute(unsigned short opcode, enum instructions inst){
     switch (inst) {
@@ -129,15 +131,14 @@ void execute(unsigned short opcode, enum instructions inst){
 //Execution for clear screen instruction
 //CLS
 void execute_00E0(void){
-    //Double loop to iterate through each pixel on screen
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderClear(renderer);
+    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+    //Double loop to iterate through and cleareach pixel on screen
     for(int x_counter = 0; x_counter <SCREEN_WIDTH/PIXEL_WIDTH; x_counter+=PIXEL_WIDTH){
         for(int y_counter = 0; y_counter<SCREEN_HEIGHT/PIXEL_HEIGHT; y_counter +=PIXEL_HEIGHT){
-            //If a pixel is set
-            if(display[x_counter][y_counter] == 1){
-                //Change value in array and then unset
-                display[x_counter][y_counter] = 0;
-                draw_pixel(x_counter, y_counter);
-            }
+            //Set all pixels to 0
+            display[x_counter][y_counter] = 0;
 
         }
     }
@@ -151,12 +152,10 @@ void execute_00EE(void){
         //may remove this if correct behavior is
         printf("Error: Nothing to return from");
     }
-    else{
         //PC is filled from stack pointer
         PC = stack[SP];
         //Stack pointer is decremented
         SP--;
-    }
 }
 
 //Execution of jump instruction
@@ -258,37 +257,49 @@ void execute_8XY3(unsigned char X, unsigned char Y){
 //Execution of registers add instruction
 //ADD Vx, Vy
 void execute_8XY4(unsigned char X, unsigned char Y){
+    //If register Vx is not flag
+    if(X != 0xf){
+        //Set Vx to Vx + Vy
+        registers[X] = registers[X] + registers[Y];
+    }
     //If total is greater then 256
-    if(registers[X] + registers[Y] > 255) registers[0xf] = 0x01;
-    //Set Vx to Vx + Vy
-    registers[X] = registers[X] + registers[Y];
+    registers[0xf] = (registers[X] + registers[Y] > 255)  ? 0x1: 0x0;
 }
 
 //Execution of subtraction Vx - Vy instruction
 //SUB Vx, Vy
 void execute_8XY5(unsigned char X, unsigned char Y){
+    //If register Vx is not flag
+    if(X != 0xf) {
+        //Subract Vy from Vx
+        registers[X] = registers[X] - registers[Y];
+    }
     //Set Vf to 1 if Vx > Vy and 0 if not
     registers[0xf] = registers[X] > registers[Y] ? 0x01 : 0x0;
-    //Subract Vy from Vx
-    registers[X] = registers[X] - registers[Y];
 }
 
 //Execution of shift right instruction
-//SHR Vx, Vy (Vy is unused)
+//SHR Vx
 void execute_8XY6(unsigned char X, unsigned char Y){
+    //If register Vx is not flag
+    if(X != 0xf) {
+        //Shift Vx right by 1
+        registers[X] >>= 1;
+    }
     //Store LSB of Vx in Vf
     registers[0xf] = registers[X] & 0b00000001;
-    //Shift Vx right
-    registers[X] >>= 1;
 }
 
 //Execution of subtraction Vy - Vx instruction
 //SUBN Vx, Vy
 void execute_8XY7(unsigned char X, unsigned char Y){
+    //If register Vx is not flag
+    if(X != 0xf) {
+        //Subract Vy from Vx
+        registers[X] = registers[Y] - registers[X];
+    }
     //Set Vf to 1 if Vy > VX and 0 if not
     registers[0xf] = registers[Y] > registers[X] ? 0x01 : 0x0;
-    //Subract Vy from Vx
-    registers[X] = registers[Y] - registers[X];
 }
 
 //Execution of shift left instruction
@@ -296,8 +307,11 @@ void execute_8XY7(unsigned char X, unsigned char Y){
 void execute_8XYE(unsigned char X, unsigned char Y){
     //Store MSB of Vx in Vf
     registers[0xf] = registers[X] & 0b10000000;
-    //Shift Vx left
-    registers[X] <<= 1;
+    //If register Vx has not already been set
+    if(X != 0xf) {
+        //Shift Vx left
+        registers[X] <<= 1;
+    }
 }
 
 //Execution of set not equal instruction
@@ -360,12 +374,23 @@ void execute_DXYN(unsigned char X, unsigned char Y, unsigned char N){
 //Execution of key pressed skip instruction
 //SKP Vx
 void execute_EX9E(unsigned char X){
+    //If key X is pressed
+    if(keypad[X]){
+        //Increment PC
+        PC+=2;
+    }
 
 }
 
 //Execution of key not pressed skip instruction
 //SKNP Vx
 void execute_EXA1(unsigned char X){
+    //If key X is not pressed
+    if(!keypad[X]){
+        //Increment PC
+        PC+=2;
+    }
+
 
 }
 
@@ -373,13 +398,23 @@ void execute_EXA1(unsigned char X){
 //LD Vx, DT
 void execute_FX07(unsigned char X){
     //Set value of Vx to value of delay timer
-    //registers[X] = delay_timer;
+    registers[X] = delay_timer;
 }
 
 //Execution of get key pressed instruction
 //LD Vx, K
 void execute_FX0A(unsigned char X){
+    unsigned char waiting_for_key = 1;
     //Stop execution until key pressed
+    while(waiting_for_key)
+    for (int i = 0; i < 0xf; i++) {
+        //If a key in the map has been given by event
+        if (keypad[i]){
+            //Stop waiting
+            waiting_for_key = 0;
+            registers[X] = i;
+        }
+    }
 }
 
 //Execution of the set delay timer instruction
