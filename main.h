@@ -47,6 +47,8 @@ enum instructions {
     iFX55, iFX65, unknown
 };
 
+//Execution functions for each instruction
+//These are done in this format for ease of implementation
 extern void execute_00E0(void);
 extern void execute_00EE(void);
 extern void execute_1NNN(unsigned short NNN);
@@ -97,6 +99,10 @@ extern unsigned char SP;
 extern unsigned short stack[16];
 //Declare display
 extern unsigned char display[64][32];
+//Declare delay timer
+extern unsigned char delay_timer;
+//Declare sound timer
+extern unsigned char sound_timer;
 
 extern void load(char *filename);
 

@@ -70,6 +70,10 @@ int main(int argc, char** argv) {
             switch(event.type){
                 case SDL_QUIT:
                     exit(0);
+                case(SDL_KEYDOWN):
+                    ( &event.key );
+                    break;
+                case(SDL_KEYUP):
             }
         }
     }

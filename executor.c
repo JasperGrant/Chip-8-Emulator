@@ -10,6 +10,10 @@ unsigned short stack[16];
 
 unsigned short I;
 
+unsigned char delay_timer;
+
+unsigned char sound_timer;
+
 
 void execute(unsigned short opcode, enum instructions inst){
     switch (inst) {
@@ -351,18 +355,46 @@ void execute_DXYN(unsigned char X, unsigned char Y, unsigned char N){
 
         }
     }
+}
 
-
-
-
+//Execution of key pressed skip instruction
+//SKP Vx
+void execute_EX9E(unsigned char X){
 
 }
-void execute_EX9E(unsigned char X){}
-void execute_EXA1(unsigned char X){}
-void execute_FX07(unsigned char X){}
-void execute_FX0A(unsigned char X){}
-void execute_FX15(unsigned char X){}
-void execute_FX18(unsigned char X){}
+
+//Execution of key not pressed skip instruction
+//SKNP Vx
+void execute_EXA1(unsigned char X){
+
+}
+
+//Execution of the set get delay timer value instruction
+//LD Vx, DT
+void execute_FX07(unsigned char X){
+    //Set value of Vx to value of delay timer
+    //registers[X] = delay_timer;
+}
+
+//Execution of get key pressed instruction
+//LD Vx, K
+void execute_FX0A(unsigned char X){
+    //Stop execution until key pressed
+}
+
+//Execution of the set delay timer instruction
+//LD ST, Vx
+void execute_FX15(unsigned char X){
+    //Set value of delay timer from Vx
+    delay_timer = registers[X];
+}
+
+//Execution of the set sound timer instruction
+//LD DT, Vx
+void execute_FX18(unsigned char X){
+    //Set value of sound timer from Vx
+    sound_timer = registers[X];
+}
 
 //Execution of add register to index instruction
 //ADD I, Vx
@@ -383,9 +415,29 @@ void execute_FX29(unsigned char X){
 //LD [I] Vx
 void execute_FX33(unsigned char X){
     //Stores base ten interpretation of Vx in I, I+1, I+2
-    //TODO: Finish this
-    memory[I] = registers[X] % 1000;
-    memory[I+1] = registers[X] % 100
+    //TODO: Double check logic
+    memory[I] = registers[X]/100;
+    memory[I+1] = (registers[X] % 100)/10;
+    memory[I+2] = registers[X] % 10;
 }
-void execute_FX55(unsigned char X){}
-void execute_FX65(unsigned char X){}
+
+//Execution of instruction to store register values in memory
+//LD [I], Vx
+void execute_FX55(unsigned char X){
+    //Loop from V0 to Vx
+    for(int i = 0; i<=X; i++){
+        //Store ith register in I+i memory address
+        memory[I+i] = registers[i];
+    }
+
+}
+
+//Execution of instruction to restore register values from memory
+//LD Vx, [I]
+void execute_FX65(unsigned char X){
+    //Loop from V0 to Vx
+    for(int i = 0; i<=X; i++){
+        //Store I+i memory address in ith register
+        registers[i] = memory[I+i];
+    }
+}
