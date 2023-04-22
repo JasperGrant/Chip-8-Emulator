@@ -5,4 +5,7 @@ A simple Chip-8-Emulator written in C. Written to see if I want to build more co
 
 Used SDL2 for grapbhics (Hacker Green)
 
-Currently only has enough instructions implemented to render the IBM logo
+Now has all instructions implemented and in the process of testing
+
+![image](https://user-images.githubusercontent.com/72110751/233801532-2dd98816-0127-49f4-bd78-1660c08f5637.png)
+
