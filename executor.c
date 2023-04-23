@@ -147,11 +147,6 @@ void execute_00E0(void){
 //Execution for return from subroutine instruction
 //RET
 void execute_00EE(void){
-    //SP = -1 is the case where stack is empty.
-    if(SP == 0){
-        //may remove this if correct behavior is
-        printf("Error: Nothing to return from");
-    }
         //PC is filled from stack pointer
         PC = stack[SP];
         //Stack pointer is decremented
@@ -257,37 +252,43 @@ void execute_8XY3(unsigned char X, unsigned char Y){
 //Execution of registers add instruction
 //ADD Vx, Vy
 void execute_8XY4(unsigned char X, unsigned char Y){
+    //Sum should be done first to not use already added values in calculation
+    //Short to ensure going over 255 is possible
+    unsigned short sum = registers[X] + registers[Y];
     //If register Vx is not flag
     if(X != 0xf){
         //Set Vx to Vx + Vy
         registers[X] = registers[X] + registers[Y];
     }
+
     //If total is greater then 256
-    registers[0xf] = (registers[X] + registers[Y] > 255)  ? 0x1: 0x0;
+    registers[0xf] = (sum > 255)  ? 0x1: 0x0;
 }
 
 //Execution of subtraction Vx - Vy instruction
 //SUB Vx, Vy
 void execute_8XY5(unsigned char X, unsigned char Y){
+    //Set initial difference as signed to see if borrow is necessary
+    char difference = registers[X] > registers[Y];
     //If register Vx is not flag
     if(X != 0xf) {
         //Subract Vy from Vx
         registers[X] = registers[X] - registers[Y];
     }
-    //Set Vf to 1 if Vx > Vy and 0 if not
-    registers[0xf] = registers[X] > registers[Y] ? 0x01 : 0x0;
+    //Set Vf to 1 if difference > 0 and 0 if difference < 0
+    registers[0xf] = difference > 0 ? 0x01 : 0x0;
 }
 
 //Execution of shift right instruction
-//SHR Vx
+//SHR Vx (Vy is unused)
 void execute_8XY6(unsigned char X, unsigned char Y){
+    //Store LSB of Vx in Vf
+    registers[0xf] = registers[X] & 0b00000001;
     //If register Vx is not flag
     if(X != 0xf) {
         //Shift Vx right by 1
         registers[X] >>= 1;
     }
-    //Store LSB of Vx in Vf
-    registers[0xf] = registers[X] & 0b00000001;
 }
 
 //Execution of subtraction Vy - Vx instruction
@@ -306,7 +307,9 @@ void execute_8XY7(unsigned char X, unsigned char Y){
 //SHL Vx, Vy (Vy is unused)
 void execute_8XYE(unsigned char X, unsigned char Y){
     //Store MSB of Vx in Vf
-    registers[0xf] = registers[X] & 0b10000000;
+    //Quick way to get 8th bit
+    //All other bits are lost in the shift
+    registers[0xf] = registers[X] >> 7;
     //If register Vx has not already been set
     if(X != 0xf) {
         //Shift Vx left

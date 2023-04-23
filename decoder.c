@@ -15,9 +15,9 @@ enum instructions decode(unsigned short opcode){
                     return i00E0;
                 case 0xe:
                     return i00EE;
-                default:
-                    return unknown;
+
             }
+            break;
         case 0x1:
             return i1NNN;
         case 0x2:
@@ -52,9 +52,8 @@ enum instructions decode(unsigned short opcode){
                     return i8XY7;
                 case 0xe:
                     return i8XYE;
-                default:
-                    return unknown;
             }
+            break;
         case 0x9:
             return i9XY0;
         case 0xa:
@@ -67,13 +66,12 @@ enum instructions decode(unsigned short opcode){
             return iDXYN;
         case 0xe:
             switch(NN(opcode)){
-                case 0x98:
+                case 0x9e:
                     return iEX9E;
                 case 0xa1:
                     return iEXA1;
-                default:
-                    return unknown;
             }
+            break;
         case 0xf:
             switch(NN(opcode)){
                 case 0x07:
@@ -94,13 +92,10 @@ enum instructions decode(unsigned short opcode){
                     return iFX55;
                 case 0x65:
                     return iFX65;
-                default:
-                    return unknown;
             }
-        default:
-            return unknown;
+            break;
     }
 
 
-
+    return unknown;
 }
