@@ -13,5 +13,3 @@ Used SDL2 for grapbhics (Hacker Green)
 ![image](https://user-images.githubusercontent.com/72110751/233801532-2dd98816-0127-49f4-bd78-1660c08f5637.png)
 
 ![image](https://user-images.githubusercontent.com/72110751/233814292-24b7e409-cc50-43f0-b420-33c345d48cf7.png)
-
-![image](https://user-images.githubusercontent.com/72110751/233814369-06fda036-e2a6-4da9-8e82-4e4f4d81ef03.png)
