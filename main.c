@@ -3,7 +3,7 @@
 unsigned short PC;
 
 unsigned char keymap[16] = {
-        SDLK_1, SDLK_2, SDLK_3, SDLK_c,
+        SDLK_1, SDLK_2, SDLK_3, SDLK_4,
         SDLK_q, SDLK_w, SDLK_e, SDLK_r,
         SDLK_a, SDLK_s, SDLK_d, SDLK_f,
         SDLK_z, SDLK_x, SDLK_c, SDLK_v,
@@ -73,6 +73,7 @@ int main(int argc, char **argv) {
         inst = decode(opcode);
         //Execute
         execute(opcode, inst);
+        printf("input: %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n", keypad[0], keypad[1], keypad[2], keypad[3], keypad[4], keypad[5], keypad[6], keypad[7], keypad[8], keypad[9], keypad[10], keypad[11], keypad[12], keypad[13], keypad[14], keypad[15]);
         //Poll
         poll();
     }
@@ -85,11 +86,12 @@ void poll(void) {
         //Switch for different SDL event cases such as closing
         //the window or keypad press
         switch (event.type) {
+
             case SDL_QUIT:
                 exit(0);
             case SDL_KEYDOWN:
                 //For loop to check every key every cycle
-                for (int i = 0; i < 0xf; i++) {
+                for (int i = 0; i <= 0xf; i++) {
                     //If a key in the map has been given by event
                     if (event.key.keysym.sym == keymap[i]){
                         //Set that keypad digit
@@ -98,7 +100,7 @@ void poll(void) {
                 }
                 break;
             case SDL_KEYUP:
-                for (int i = 0; i < 0xf; i++) {
+                for (int i = 0; i <= 0xf; i++) {
                     //If a key in the map has been given by event
                     if (event.key.keysym.sym == keymap[i]){
                         //Set that keypad digit
