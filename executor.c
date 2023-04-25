@@ -281,7 +281,7 @@ void execute_8XY5(unsigned char X, unsigned char Y){
 
 //Execution of shift right instruction
 //SHR Vx (Vy is unused)
-void execute_8XY6(unsigned char X, unsigned char Y){
+void execute_8XY6(unsigned char X){
     //Store LSB of Vx in Vf
     registers[0xf] = registers[X] & 0b00000001;
     //If register Vx is not flag
@@ -305,7 +305,7 @@ void execute_8XY7(unsigned char X, unsigned char Y){
 
 //Execution of shift left instruction
 //SHL Vx, Vy (Vy is unused)
-void execute_8XYE(unsigned char X, unsigned char Y){
+void execute_8XYE(unsigned char X){
     //Store MSB of Vx in Vf
     //Quick way to get 8th bit
     //All other bits are lost in the shift
@@ -378,7 +378,7 @@ void execute_DXYN(unsigned char X, unsigned char Y, unsigned char N){
 //SKP Vx
 void execute_EX9E(unsigned char X){
     //If key X is pressed
-    if(keypad[X]){
+    if(keypad[X] == 1){
         //Increment PC
         PC+=2;
     }
@@ -389,7 +389,7 @@ void execute_EX9E(unsigned char X){
 //SKNP Vx
 void execute_EXA1(unsigned char X){
     //If key X is not pressed
-    if(!keypad[X]){
+    if(keypad[X] != 1){
         //Increment PC
         PC+=2;
     }
