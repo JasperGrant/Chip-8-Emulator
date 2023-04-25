@@ -64,13 +64,13 @@ void execute(unsigned short opcode, enum instructions inst){
             execute_8XY5(X(opcode), Y(opcode));
             break;
         case i8XY6:
-            execute_8XY6(X(opcode), Y(opcode));
+            execute_8XY6(X(opcode));
             break;
         case i8XY7:
             execute_8XY7(X(opcode), Y(opcode));
             break;
         case i8XYE:
-            execute_8XYE(X(opcode), Y(opcode));
+            execute_8XYE(X(opcode));
             break;
         case i9XY0:
             execute_9XY0(X(opcode), Y(opcode));
@@ -269,10 +269,10 @@ void execute_8XY4(unsigned char X, unsigned char Y){
 //SUB Vx, Vy
 void execute_8XY5(unsigned char X, unsigned char Y){
     //Set initial difference as signed to see if borrow is necessary
-    char difference = registers[X] > registers[Y];
+    char difference = registers[X] - registers[Y];
     //If register Vx is not flag
     if(X != 0xf) {
-        //Subract Vy from Vx
+        //Subtract Vy from Vx
         registers[X] = registers[X] - registers[Y];
     }
     //Set Vf to 1 if difference > 0 and 0 if difference < 0
@@ -378,7 +378,7 @@ void execute_DXYN(unsigned char X, unsigned char Y, unsigned char N){
 //SKP Vx
 void execute_EX9E(unsigned char X){
     //If key X is pressed
-    if(keypad[X] == 1){
+    if(keypad[registers[X]]){
         //Increment PC
         PC+=2;
     }
@@ -388,8 +388,8 @@ void execute_EX9E(unsigned char X){
 //Execution of key not pressed skip instruction
 //SKNP Vx
 void execute_EXA1(unsigned char X){
-    //If key X is not pressed
-    if(keypad[X] != 1){
+    //If key in Vx is not pressed
+    if(!keypad[registers[X]]){
         //Increment PC
         PC+=2;
     }

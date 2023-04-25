@@ -3,10 +3,10 @@
 unsigned short PC;
 
 unsigned char keymap[16] = {
-        SDLK_1, SDLK_2, SDLK_3, SDLK_4,
-        SDLK_q, SDLK_w, SDLK_e, SDLK_r,
-        SDLK_a, SDLK_s, SDLK_d, SDLK_f,
-        SDLK_z, SDLK_x, SDLK_c, SDLK_v,
+        SDLK_x, SDLK_2, SDLK_3, SDLK_z,
+        SDLK_q, SDLK_w, SDLK_e, SDLK_s,
+        SDLK_a, SDLK_4, SDLK_r, SDLK_c,
+        SDLK_d, SDLK_1, SDLK_f, SDLK_v,
 
 };
 
@@ -116,6 +116,6 @@ void poll(void) {
     if (sound_timer) sound_timer--;
     if (delay_timer) delay_timer--;
 
-    SDL_Delay(5);
+    SDL_Delay(1);
 
 }
