@@ -134,14 +134,11 @@ void execute_00E0(void){
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-    //Double loop to iterate through and cleareach pixel on screen
-    for(int x_counter = 0; x_counter <SCREEN_WIDTH/PIXEL_WIDTH; x_counter+=PIXEL_WIDTH){
-        for(int y_counter = 0; y_counter<SCREEN_HEIGHT/PIXEL_HEIGHT; y_counter +=PIXEL_HEIGHT){
-            //Set all pixels to 0
-            display[x_counter][y_counter] = 0;
 
-        }
-    }
+    //Zero display memory
+    //This was implemented as a loop but memset is cleaner and faster
+    memset(display, 0, sizeof(char)*SCREEN_HEIGHT/PIXEL_HEIGHT*SCREEN_WIDTH/PIXEL_WIDTH);
+
 }
 
 //Execution for return from subroutine instruction
@@ -233,6 +230,8 @@ void execute_8XY0(unsigned char X, unsigned char Y){
 void execute_8XY1(unsigned char X, unsigned char Y){
     //Set Vx = Vx OR vy
     registers[X] = registers[X] | registers[Y];
+    //Reset Vf to 0
+    registers[0xf] = 0;
 }
 
 //Execution of registers AND instruction
@@ -240,6 +239,8 @@ void execute_8XY1(unsigned char X, unsigned char Y){
 void execute_8XY2(unsigned char X, unsigned char Y){
     //Set Vx = Vx AND vy
     registers[X] = registers[X] & registers[Y];
+    //Reset Vf to 0
+    registers[0xf] = 0;
 }
 
 //Execution of registers XOR instruction
@@ -247,6 +248,8 @@ void execute_8XY2(unsigned char X, unsigned char Y){
 void execute_8XY3(unsigned char X, unsigned char Y){
     //Set Vx = Vx XOR vy
     registers[X] = registers[X] ^ registers[Y];
+    //Reset Vf to 0
+    registers[0xf] = 0;
 }
 
 //Execution of registers add instruction
@@ -372,6 +375,7 @@ void execute_DXYN(unsigned char X, unsigned char Y, unsigned char N){
 
         }
     }
+
 }
 
 //Execution of key pressed skip instruction
@@ -457,6 +461,8 @@ void execute_FX33(unsigned char X){
     memory[I] = registers[X]/100;
     memory[I+1] = (registers[X] % 100)/10;
     memory[I+2] = registers[X] % 10;
+    //Increment I past these numbers
+    I+=3;
 }
 
 //Execution of instruction to store register values in memory
@@ -467,6 +473,8 @@ void execute_FX55(unsigned char X){
         //Store ith register in I+i memory address
         memory[I+i] = registers[i];
     }
+    //Increment I by number of registers
+    I+=(X+1);
 
 }
 
