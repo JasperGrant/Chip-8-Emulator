@@ -3,7 +3,7 @@ A simple Chip-8-Emulator written in C. Written to see if I want to build more co
 
 ![image](https://user-images.githubusercontent.com/72110751/232661244-623a275f-9902-448b-8c3c-888538b668ce.png)
 
-Used SDL2 for grapbhics (Hacker Green)
+Used SDL2 for graphics (Hacker Green)
 
 - All instructions are implemented
 - All instructions are tested using chip8-test-suite
