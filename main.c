@@ -78,6 +78,11 @@ int main(int argc, char **argv) {
         printf("input: %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n", keypad[0], keypad[1], keypad[2], keypad[3], keypad[4], keypad[5], keypad[6], keypad[7], keypad[8], keypad[9], keypad[10], keypad[11], keypad[12], keypad[13], keypad[14], keypad[15]);
         //Poll
         poll();
+        //Decrement timers
+        if (sound_timer) sound_timer--;
+        if (delay_timer) delay_timer--;
+
+        SDL_Delay(1);
     }
 }
 
@@ -113,11 +118,5 @@ void poll(void) {
         }
 
     }
-
-    //Decrement timers
-    if (sound_timer) sound_timer--;
-    if (delay_timer) delay_timer--;
-
-    SDL_Delay(1);
 
 }

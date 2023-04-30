@@ -17,7 +17,7 @@ unsigned char sound_timer;
 unsigned char keypad[16];
 
 
-void execute(unsigned short opcode, enum instructions inst){
+void execute(unsigned short opcode, enum instructions inst) {
     switch (inst) {
         case i00E0:
             execute_00E0();
@@ -130,37 +130,38 @@ void execute(unsigned short opcode, enum instructions inst){
 
 //Execution for clear screen instruction
 //CLS
-void execute_00E0(void){
+void execute_00E0(void) {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 
     //Zero display memory
     //This was implemented as a loop but memset is cleaner and faster
-    memset(display, 0, sizeof(char)*SCREEN_HEIGHT/PIXEL_HEIGHT*SCREEN_WIDTH/PIXEL_WIDTH);
+    memset(display, 0, sizeof(char) * SCREEN_HEIGHT / PIXEL_HEIGHT * SCREEN_WIDTH / PIXEL_WIDTH);
 
 }
 
 //Execution for return from subroutine instruction
 //RET
-void execute_00EE(void){
-        //PC is filled from stack pointer
-        PC = stack[SP];
-        //Stack pointer is decremented
-        SP--;
+void execute_00EE(void) {
+    //PC is filled from stack pointer
+    PC = stack[SP];
+    //Stack pointer is decremented
+    SP--;
 }
 
 //Execution of jump instruction
 //JP
-void execute_1NNN(unsigned short NNN){
+void execute_1NNN(unsigned short NNN) {
     //Program counter is equal to final three nibbles
     PC = NNN;
 }
+
 //Execution of call subroutine instruction
 //CALL addr
-void execute_2NNN(unsigned short NNN){
+void execute_2NNN(unsigned short NNN) {
     //If SP == 0xf
-    if(SP == 15) {
+    if (SP == 15) {
         printf("Error: stack overflow");
         exit(-1);
     }
@@ -175,59 +176,59 @@ void execute_2NNN(unsigned short NNN){
 
 //Execution of skip if equal instruction
 //SE Vx, byte
-void execute_3XNN(unsigned char X, unsigned char NN){
+void execute_3XNN(unsigned char X, unsigned char NN) {
     //If register Vx = NN
-    if(registers[X] == NN){
+    if (registers[X] == NN) {
         //Skip one instruction by adding 2 to PC
-        PC+=2;
+        PC += 2;
     }
 
 }
 
 //Execution of skip if not equal instruction
 //SNE Vx, byte
-void execute_4XNN(unsigned char X, unsigned char NN){
+void execute_4XNN(unsigned char X, unsigned char NN) {
     //If register Vx != NN
-    if(registers[X] != NN){
+    if (registers[X] != NN) {
         //Skip one instruction by adding 2 to PC
-        PC+=2;
+        PC += 2;
     }
 }
 
 //Execution of skip if registers are equal instruction
 //SE Vx, Vy
-void execute_5XY0(unsigned char X, unsigned char Y){
+void execute_5XY0(unsigned char X, unsigned char Y) {
     //If register Vx == Vy
-    if(registers[X] == registers[Y]){
+    if (registers[X] == registers[Y]) {
         //Skip one instruction by adding 2 to PC
-        PC+=2;
+        PC += 2;
     }
 }
 
 //Execution of load instruction
 //LD Vx, byte
-void execute_6XNN(unsigned char X, unsigned char NN){
+void execute_6XNN(unsigned char X, unsigned char NN) {
     //Load value NN into register Vx
     registers[X] = NN;
 }
 
 //Execution of add to register instruction
 //ADD Vx, byte
-void execute_7XNN(unsigned char X, unsigned char NN){
+void execute_7XNN(unsigned char X, unsigned char NN) {
     //Add value NN to register Vx
     registers[X] += NN;
 }
 
 //Execution of copy register instruction
 //LD Vx, Vy
-void execute_8XY0(unsigned char X, unsigned char Y){
+void execute_8XY0(unsigned char X, unsigned char Y) {
     //Copy register to another register
     registers[X] = registers[Y];
 }
 
 //Execution of registers OR instruction
 //OR Vx, Vy
-void execute_8XY1(unsigned char X, unsigned char Y){
+void execute_8XY1(unsigned char X, unsigned char Y) {
     //Set Vx = Vx OR vy
     registers[X] = registers[X] | registers[Y];
     //Reset Vf to 0
@@ -236,7 +237,7 @@ void execute_8XY1(unsigned char X, unsigned char Y){
 
 //Execution of registers AND instruction
 //AND Vx, Vy
-void execute_8XY2(unsigned char X, unsigned char Y){
+void execute_8XY2(unsigned char X, unsigned char Y) {
     //Set Vx = Vx AND vy
     registers[X] = registers[X] & registers[Y];
     //Reset Vf to 0
@@ -245,7 +246,7 @@ void execute_8XY2(unsigned char X, unsigned char Y){
 
 //Execution of registers XOR instruction
 //XOR Vx, Vy
-void execute_8XY3(unsigned char X, unsigned char Y){
+void execute_8XY3(unsigned char X, unsigned char Y) {
     //Set Vx = Vx XOR vy
     registers[X] = registers[X] ^ registers[Y];
     //Reset Vf to 0
@@ -254,27 +255,27 @@ void execute_8XY3(unsigned char X, unsigned char Y){
 
 //Execution of registers add instruction
 //ADD Vx, Vy
-void execute_8XY4(unsigned char X, unsigned char Y){
+void execute_8XY4(unsigned char X, unsigned char Y) {
     //Sum should be done first to not use already added values in calculation
     //Short to ensure going over 255 is possible
     unsigned short sum = registers[X] + registers[Y];
     //If register Vx is not flag
-    if(X != 0xf){
+    if (X != 0xf) {
         //Set Vx to Vx + Vy
         registers[X] = registers[X] + registers[Y];
     }
 
     //If total is greater then 256
-    registers[0xf] = (sum > 255)  ? 0x1: 0x0;
+    registers[0xf] = (sum > 255) ? 0x1 : 0x0;
 }
 
 //Execution of subtraction Vx - Vy instruction
 //SUB Vx, Vy
-void execute_8XY5(unsigned char X, unsigned char Y){
+void execute_8XY5(unsigned char X, unsigned char Y) {
     //Set initial difference as signed to see if borrow is necessary
     char difference = registers[X] - registers[Y];
     //If register Vx is not flag
-    if(X != 0xf) {
+    if (X != 0xf) {
         //Subtract Vy from Vx
         registers[X] = registers[X] - registers[Y];
     }
@@ -284,11 +285,11 @@ void execute_8XY5(unsigned char X, unsigned char Y){
 
 //Execution of shift right instruction
 //SHR Vx (Vy is unused)
-void execute_8XY6(unsigned char X){
+void execute_8XY6(unsigned char X) {
     //Store LSB of Vx in Vf
     registers[0xf] = registers[X] & 0b00000001;
     //If register Vx is not flag
-    if(X != 0xf) {
+    if (X != 0xf) {
         //Shift Vx right by 1
         registers[X] >>= 1;
     }
@@ -296,9 +297,9 @@ void execute_8XY6(unsigned char X){
 
 //Execution of subtraction Vy - Vx instruction
 //SUBN Vx, Vy
-void execute_8XY7(unsigned char X, unsigned char Y){
+void execute_8XY7(unsigned char X, unsigned char Y) {
     //If register Vx is not flag
-    if(X != 0xf) {
+    if (X != 0xf) {
         //Subract Vy from Vx
         registers[X] = registers[Y] - registers[X];
     }
@@ -308,13 +309,13 @@ void execute_8XY7(unsigned char X, unsigned char Y){
 
 //Execution of shift left instruction
 //SHL Vx, Vy (Vy is unused)
-void execute_8XYE(unsigned char X){
+void execute_8XYE(unsigned char X) {
     //Store MSB of Vx in Vf
     //Quick way to get 8th bit
     //All other bits are lost in the shift
     registers[0xf] = registers[X] >> 7;
     //If register Vx has not already been set
-    if(X != 0xf) {
+    if (X != 0xf) {
         //Shift Vx left
         registers[X] <<= 1;
     }
@@ -322,27 +323,27 @@ void execute_8XYE(unsigned char X){
 
 //Execution of set not equal instruction
 //SNE Vx, Vy
-void execute_9XY0(unsigned char X, unsigned char Y){
+void execute_9XY0(unsigned char X, unsigned char Y) {
     //If registers are not equal increment PC by 2
-    if(registers[X] != registers[Y]) PC+=2;
+    if (registers[X] != registers[Y]) PC += 2;
 }
 
 //Execution for index load register
 //LD I, NNN
-void execute_ANNN(unsigned short NNN){
+void execute_ANNN(unsigned short NNN) {
     //Set I = NNN
     I = NNN;
 }
 
 //Execution of jump with offset instruction
 //JP V0, NNN
-void execute_BNNN(unsigned short NNN){
+void execute_BNNN(unsigned short NNN) {
     //Set PC to address plus offset stored in V0
     PC = NNN + registers[0x0];
 }
 
 //Execution of random number generator instruction
-void execute_CXNN(unsigned char X,unsigned char NN){
+void execute_CXNN(unsigned char X, unsigned char NN) {
     //Generate random number
     //We only need limited randomness
     registers[X] = rand();
@@ -351,24 +352,24 @@ void execute_CXNN(unsigned char X,unsigned char NN){
 }
 
 //Execution for draw instruction
-void execute_DXYN(unsigned char X, unsigned char Y, unsigned char N){
+void execute_DXYN(unsigned char X, unsigned char Y, unsigned char N) {
     //Set Vf to 0
     registers[0xf] = 0;
     //Pull values out of registers
     //X and Y are now the values stored at registers
     //Vx and Vy
-    X = registers[X];
-    Y = registers[Y];
+    X = (registers[X] < 64) ? registers[X] : registers[X]%64;
+    Y = (registers[Y] < 32) ? registers[Y] : registers[Y]%32;
     //Declare byte to store sprites in
     unsigned char byte;
     //For N rows
-    for(int y = 0; y<N; y++){
+    for (int y = 0; y < N; y++) {
         //Pull N-1th byte out of memory
         byte = memory[I + y];
         //For bit in byte / column in row
-        for(int x = 0; x<8; x++){
+        for (int x = 0; x < 8; x++) {
             //If a bit is one
-            if((byte & (0b10000000 >> x))){
+            if ((byte & (0b10000000 >> x))) {
                 //Flip bit and if a set bit is turned off: Vf = 1
                 registers[0xF] = draw_pixel(X + x, Y + y);
             }
@@ -380,22 +381,22 @@ void execute_DXYN(unsigned char X, unsigned char Y, unsigned char N){
 
 //Execution of key pressed skip instruction
 //SKP Vx
-void execute_EX9E(unsigned char X){
+void execute_EX9E(unsigned char X) {
     //If key X is pressed
-    if(keypad[registers[X]]){
+    if (keypad[registers[X]]) {
         //Increment PC
-        PC+=2;
+        PC += 2;
     }
 
 }
 
 //Execution of key not pressed skip instruction
 //SKNP Vx
-void execute_EXA1(unsigned char X){
+void execute_EXA1(unsigned char X) {
     //If key in Vx is not pressed
-    if(!keypad[registers[X]]){
+    if (!keypad[registers[X]]) {
         //Increment PC
-        PC+=2;
+        PC += 2;
     }
 
 
@@ -403,51 +404,85 @@ void execute_EXA1(unsigned char X){
 
 //Execution of the set get delay timer value instruction
 //LD Vx, DT
-void execute_FX07(unsigned char X){
+void execute_FX07(unsigned char X) {
     //Set value of Vx to value of delay timer
     registers[X] = delay_timer;
 }
 
 //Execution of get key pressed instruction
 //LD Vx, K
-void execute_FX0A(unsigned char X){
+void execute_FX0A(unsigned char X) {
     unsigned char waiting_for_key = 1;
     //Stop execution until key pressed
-    while(waiting_for_key)
-    for (int i = 0; i < 0xf; i++) {
-        //If a key in the map has been given by event
-        if (keypad[i]){
-            //Stop waiting
-            waiting_for_key = 0;
-            registers[X] = i;
+    SDL_Event event;
+    while (waiting_for_key) {
+        printf("2");
+        SDL_PollEvent(&event);
+        //Switch for different SDL event cases such as closing
+        //the window or keypad press
+        switch (event.type) {
+
+            case SDL_QUIT:
+                exit(0);
+            case SDL_KEYDOWN:
+                //For loop to check every key every cycle
+                for (int i = 0; i <= 0xf; i++) {
+                    //If a key in the map has been given by event
+                    if (event.key.keysym.sym == keymap[i]) {
+                        //Set that keypad digit
+                        registers[X] = i;
+                    }
+                }
+                waiting_for_key = 0;
+                break;
         }
+
+    }
+    while (1) {
+        SDL_PollEvent(&event);
+        printf("1");
+        //Switch for different SDL event cases such as closing
+        //the window or keypad press
+        switch (event.type) {
+
+            case SDL_QUIT:
+                exit(0);
+            case SDL_KEYUP:
+                printf("3");
+                if (event.key.keysym.sym == keymap[registers[X]]) {
+                    //Set that keypad digit
+                    return;
+                }
+                break;
+        }
+
     }
 }
 
 //Execution of the set delay timer instruction
 //LD ST, Vx
-void execute_FX15(unsigned char X){
+void execute_FX15(unsigned char X) {
     //Set value of delay timer from Vx
     delay_timer = registers[X];
 }
 
 //Execution of the set sound timer instruction
 //LD DT, Vx
-void execute_FX18(unsigned char X){
+void execute_FX18(unsigned char X) {
     //Set value of sound timer from Vx
     sound_timer = registers[X];
 }
 
 //Execution of add register to index instruction
 //ADD I, Vx
-void execute_FX1E(unsigned char X){
+void execute_FX1E(unsigned char X) {
     //Set I to I + Vx
-    I+=registers[X];
+    I += registers[X];
 }
 
 //Execution of select font letter instruction
 //LD F, Vx
-void execute_FX29(unsigned char X){
+void execute_FX29(unsigned char X) {
     //Set I to the memory location of a font letter
     I = registers[X] * 5;
     //Font sprites start at 0 and each take 5 characters
@@ -455,35 +490,35 @@ void execute_FX29(unsigned char X){
 
 //Execution of digit store instruction
 //LD [I] Vx
-void execute_FX33(unsigned char X){
+void execute_FX33(unsigned char X) {
     //Stores base ten interpretation of Vx in I, I+1, I+2
     //TODO: Double check logic
-    memory[I] = registers[X]/100;
-    memory[I+1] = (registers[X] % 100)/10;
-    memory[I+2] = registers[X] % 10;
+    memory[I] = registers[X] / 100;
+    memory[I + 1] = (registers[X] % 100) / 10;
+    memory[I + 2] = registers[X] % 10;
     //Increment I past these numbers
-    I+=3;
+    I += 3;
 }
 
 //Execution of instruction to store register values in memory
 //LD [I], Vx
-void execute_FX55(unsigned char X){
+void execute_FX55(unsigned char X) {
     //Loop from V0 to Vx
-    for(int i = 0; i<=X; i++){
+    for (int i = 0; i <= X; i++) {
         //Store ith register in I+i memory address
-        memory[I+i] = registers[i];
+        memory[I + i] = registers[i];
     }
     //Increment I by number of registers
-    I+=(X+1);
+    I += (X + 1);
 
 }
 
 //Execution of instruction to restore register values from memory
 //LD Vx, [I]
-void execute_FX65(unsigned char X){
+void execute_FX65(unsigned char X) {
     //Loop from V0 to Vx
-    for(int i = 0; i<=X; i++){
+    for (int i = 0; i <= X; i++) {
         //Store I+i memory address in ith register
-        registers[i] = memory[I+i];
+        registers[i] = memory[I + i];
     }
 }

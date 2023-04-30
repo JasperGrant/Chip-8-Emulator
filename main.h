@@ -106,6 +106,8 @@ extern unsigned char sound_timer;
 
 extern unsigned char keypad[16];
 
+extern unsigned char keymap[16];
+
 extern void load(char *filename);
 
 extern unsigned short fetch(void);
