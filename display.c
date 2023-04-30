@@ -40,6 +40,7 @@ void display_init(void){
 unsigned char draw_pixel(unsigned char x, unsigned char y){
     //Assign values from coordinate variables to rectangle representing pixel
     //Remainders are there to handle wrapping around screen
+
     rect.x = x * PIXEL_WIDTH;
     rect.y = y * PIXEL_WIDTH;
 

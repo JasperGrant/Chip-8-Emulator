@@ -358,8 +358,8 @@ void execute_DXYN(unsigned char X, unsigned char Y, unsigned char N) {
     //Pull values out of registers
     //X and Y are now the values stored at registers
     //Vx and Vy
-    X = (registers[X] < 64) ? registers[X] : registers[X]%64;
-    Y = (registers[Y] < 32) ? registers[Y] : registers[Y]%32;
+    X = registers[X];
+    Y = registers[Y];
     //Declare byte to store sprites in
     unsigned char byte;
     //For N rows
@@ -492,12 +492,11 @@ void execute_FX29(unsigned char X) {
 //LD [I] Vx
 void execute_FX33(unsigned char X) {
     //Stores base ten interpretation of Vx in I, I+1, I+2
-    //TODO: Double check logic
     memory[I] = registers[X] / 100;
     memory[I + 1] = (registers[X] % 100) / 10;
     memory[I + 2] = registers[X] % 10;
-    //Increment I past these numbers
-    I += 3;
+    //It should be noted that I should not be automatically
+    //incremented at the end of this function
 }
 
 //Execution of instruction to store register values in memory
