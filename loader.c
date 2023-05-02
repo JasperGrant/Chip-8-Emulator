@@ -3,8 +3,13 @@
 //
 #include "main.h"
 
+//Imported global explained in main.h
+
 unsigned char memory[4096];
 
+
+//Function which loads ROMs. Contains error conditions for multiple
+//files or no files
 void load(char *filename) {
 
     //Attempt to open input file

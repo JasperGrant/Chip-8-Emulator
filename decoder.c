@@ -4,9 +4,7 @@
 
 #include "main.h"
 
-
-//TODO: Put in checks to make sure that top level paths finish in unknown instruction if incorrect
-//Example: 9XY1 Will go in as a correct 9XY0
+//Function which decodes instructions based on opcode
 enum instructions decode(unsigned short opcode){
     switch(MSN(opcode)){
         case 0x0:
@@ -95,7 +93,6 @@ enum instructions decode(unsigned short opcode){
             }
             break;
     }
-
 
     return unknown;
 }

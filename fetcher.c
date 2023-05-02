@@ -4,6 +4,8 @@
 
 #include "main.h"
 
+//Function which fetches instructions
+//Only a separate function to emphasize fetch,decode, execute cycle
 unsigned short fetch(void){
     //Fetch opcode from memory
     unsigned char MSB = memory[PC];

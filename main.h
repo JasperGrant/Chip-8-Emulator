@@ -10,6 +10,7 @@
 #include <SDL.h>
 
 
+//Macros for memory locations
 #define MEMORY_START_ADDRESS 0x200
 #define MEMORY_END_ADDRESS 4095
 
@@ -103,10 +104,12 @@ extern unsigned char display[64][32];
 extern unsigned char delay_timer;
 //Declare sound timer
 extern unsigned char sound_timer;
-
+//Declare array representing currently pressed keys
 extern unsigned char keypad[16];
-
+//Declare array representing key bindings
 extern unsigned char keymap[16];
+
+//Functions explained in their individual definitions
 
 extern void load(char *filename);
 

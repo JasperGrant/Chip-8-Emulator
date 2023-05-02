@@ -11,6 +11,8 @@ SDL_Renderer* renderer = NULL;
 SDL_Texture* texture = NULL;
 SDL_Rect rect;
 
+//All imported globals explained in main.h
+
 unsigned char registers[16];
 
 unsigned char display[64][32];

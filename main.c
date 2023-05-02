@@ -1,7 +1,10 @@
 #include "main.h"
 
+//Global explained in main.h
+
 unsigned short PC;
 
+//Array which represents keyboard keys corresponding to Chip8 keys
 //Mapping for these is very counter intuitive.
 //It really goes by index instead of the layout you see here
 unsigned char keymap[16] = {
@@ -33,8 +36,10 @@ unsigned char font[80] =
                 0xF0, 0x80, 0xF0, 0x80, 0x80  // F
         };
 
+//Event type to handle SDL events in poll
 SDL_Event event;
 
+//Main function
 int main(int argc, char **argv) {
 
     for (int i = 0; i < 80; ++i)
@@ -68,6 +73,7 @@ int main(int argc, char **argv) {
     //Declare variable to tell type of instruction
     enum instructions inst;
 
+    //FDE cycle. Only stopped by exiting emulator or error.
     while (1) {
         //Fetch
         opcode = fetch();
@@ -75,17 +81,19 @@ int main(int argc, char **argv) {
         inst = decode(opcode);
         //Execute
         execute(opcode, inst);
-        printf("input: %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n", keypad[0], keypad[1], keypad[2], keypad[3], keypad[4], keypad[5], keypad[6], keypad[7], keypad[8], keypad[9], keypad[10], keypad[11], keypad[12], keypad[13], keypad[14], keypad[15]);
-        //Poll
+        //Poll for keyboard events
         poll();
         //Decrement timers
         if (sound_timer) sound_timer--;
         if (delay_timer) delay_timer--;
 
+        //Set rate here
+        //Set with very small delay for testing
         SDL_Delay(1);
     }
 }
 
+//Function which polls during execution cycle for SDL events
 void poll(void) {
     //Poll SDL Events
     while (SDL_PollEvent(&event)) {

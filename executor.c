@@ -4,6 +4,8 @@
 
 #include "main.h"
 
+//All imported globals explained in main.h
+
 unsigned char SP;
 
 unsigned short stack[16];
@@ -16,7 +18,9 @@ unsigned char sound_timer;
 
 unsigned char keypad[16];
 
-
+//Function which chooses which instruction is executed
+//Based on decoding
+//This method was decided on for readability and easy arguments
 void execute(unsigned short opcode, enum instructions inst) {
     switch (inst) {
         case i00E0:
@@ -127,6 +131,8 @@ void execute(unsigned short opcode, enum instructions inst) {
     }
 
 }
+
+//Execution functions for all instructions:
 
 //Execution for clear screen instruction
 //CLS
@@ -412,51 +418,32 @@ void execute_FX07(unsigned char X) {
 //Execution of get key pressed instruction
 //LD Vx, K
 void execute_FX0A(unsigned char X) {
+    //Preserve state of sound and delay timers
+    unsigned char sound_timer_holder = sound_timer;
+    unsigned char delay_timer_holder = delay_timer;
+    //Set bool to tell whether key has been pressed
     unsigned char waiting_for_key = 1;
-    //Stop execution until key pressed
-    SDL_Event event;
-    while (waiting_for_key) {
-        printf("2");
-        SDL_PollEvent(&event);
-        //Switch for different SDL event cases such as closing
-        //the window or keypad press
-        switch (event.type) {
-
-            case SDL_QUIT:
-                exit(0);
-            case SDL_KEYDOWN:
-                //For loop to check every key every cycle
-                for (int i = 0; i <= 0xf; i++) {
-                    //If a key in the map has been given by event
-                    if (event.key.keysym.sym == keymap[i]) {
-                        //Set that keypad digit
-                        registers[X] = i;
-                    }
-                }
-                waiting_for_key = 0;
-                break;
+    //Loop through keys in keypad
+    for(int i = 0; i<16;i++){
+        //If key pressed found
+        if(keypad[i]){
+            //Stop loop
+            waiting_for_key = 0;
+            //Return key
+            registers[X] = i;
         }
-
     }
-    while (1) {
-        SDL_PollEvent(&event);
-        printf("1");
-        //Switch for different SDL event cases such as closing
-        //the window or keypad press
-        switch (event.type) {
+    //Shamelessly stolen from https://github.com/Klairm/chip8
+    //I thought this was a really cool idea to just use the already going loop
 
-            case SDL_QUIT:
-                exit(0);
-            case SDL_KEYUP:
-                printf("3");
-                if (event.key.keysym.sym == keymap[registers[X]]) {
-                    //Set that keypad digit
-                    return;
-                }
-                break;
-        }
-
+    //If bool has not been flipped
+    if(waiting_for_key == 1){
+        //Bring state of emulator back one instruction
+        PC-=2;
+        sound_timer = sound_timer_holder;
+        delay_timer = delay_timer_holder;
     }
+
 }
 
 //Execution of the set delay timer instruction
