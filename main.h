@@ -1,6 +1,6 @@
-//
-// Created by Jasper Grant on 2023-04-13.
-//
+//Main Header File for Chip8 Emulator Project
+//Contains Most globals and function declarations
+//Written by Jasper Grant 2023-05-01
 
 #ifndef CHIP8_MAIN_H
 #define CHIP8_MAIN_H

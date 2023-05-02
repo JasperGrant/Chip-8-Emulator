@@ -1,3 +1,7 @@
+//Main file for Chip8 Emulator Project
+//Contains some global variables along with the main and poll functions
+//Written by Jasper Grant 2023-05-01
+
 #include "main.h"
 
 //Global explained in main.h

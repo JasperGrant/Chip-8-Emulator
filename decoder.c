@@ -1,6 +1,6 @@
-//
-// Created by Jasper Grant on 2023-04-13.
-//
+//Decoder file for Chip8 Emulator Project
+//Contains decoding section of FDE cycle
+//Written by Jasper Grant 2023-05-01
 
 #include "main.h"
 

@@ -1,6 +1,7 @@
-//
-// Created by Jasper Grant on 2023-04-15.
-//
+//SDL Display file for Chip8 Emulator Project
+//Contains functions to do with the 64x32 pixel display
+//Written by Jasper Grant 2023-05-01
+
 
 #include "main.h"
 

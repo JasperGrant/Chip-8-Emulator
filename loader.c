@@ -1,6 +1,7 @@
-//
-// Created by Jasper Grant on 2023-04-12.
-//
+//Loader file for Chip8 Emulator Project
+//Contains function to load Chip8 ROMs
+//Written by Jasper Grant 2023-05-01
+
 #include "main.h"
 
 //Imported global explained in main.h
